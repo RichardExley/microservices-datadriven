@@ -10,5 +10,5 @@ export -f hatest_result_app
 
 for outage in ${outages[@]}
 do
-  $test_home/app_outage_run.sh "$batch_name" "$app" "$outage"
+  $HATEST_CODE/app_outage_run.sh "$batch_name" "$app" "$outage"
 done
