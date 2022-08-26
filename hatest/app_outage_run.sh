@@ -17,7 +17,7 @@ cd $HATEST_WORKLOAD_CODE
 ./start.sh &
 
 # Start the outage plan (async)
-cd $HATEST_PLATFORM_HOME/outages
+cd $HATEST_PLATFORM_CODE/outages
 ./start.sh "$outage" &
 
 # Wait to completion
