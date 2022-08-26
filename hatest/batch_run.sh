@@ -5,7 +5,8 @@ results_file="$4"
 
 log="$HATEST_LOG_DIR/${batch_name}.log"
 
-function hatest_result(entry) {
+function hatest_result() {
+  local entry="$1"
   echo "$batch_name $entry" >> $results_file
   echo "HATEST_RESULT: $batch_name $entry" >> $log
 }

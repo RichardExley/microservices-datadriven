@@ -2,7 +2,8 @@ batch_name="$1"
 app="$2"
 outage="$3"
 
-function hatest_result_app_outage(entry) {
+function hatest_result_app_outage() {
+  local entry="$1"
   hatest_result_app "$outage $entry"
 }
 export -f hatest_result_app_outage
