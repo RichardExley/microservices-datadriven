@@ -7,16 +7,32 @@ results_file="$6"
 
 log="$HATEST_LOG_DIR/${batch_name}.log"
 
+function hatest_set_phase() {
+  local phase="$1"
+  echo "$phase" > ~/.hatest_phase
+}
+export -f hatest_set_phase
+
+function hatest_get_phase() {
+  cat ~/.hatest_phase
+}
+export -f hatest_get_phase
+
 eval "
 function hatest_result() {
   local entry="'"$1"'"
   local current_epoch="'$(date +%s.%N)'"
-  echo "'"'"$batch_name $app_type $workload "'$current_epoch $entry"'" >> $results_file
+  local phase="'$(hatest_get_phase)'"
+  echo "'"'"$batch_name $app_type $workload "'$current_epoch $phase $entry"'" >> $results_file
 }
 "
 export -f hatest_result
-env
+
+hatest_set_phase batch_start
+
 for impl in ${impls[@]}
 do
   $HATEST_CODE/app_run.sh "$batch_name" "$app_type" "$impl" "$workload" "$outages" >>$log 2>&1
 done
+
+hatest_set_phase batch_end
