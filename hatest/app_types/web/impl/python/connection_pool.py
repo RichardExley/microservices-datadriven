@@ -153,11 +153,11 @@ def post(username):
 # Show the username for a given id
 @app.route('/user/<int:id>')
 def show_username(id):
+    app.logger.warning("Probe: %s" % request.args.get('probe','NO-PROBE'))
     with pool.acquire() as connection:
         with connection.cursor() as cursor:
             cursor.execute("select username from demo where id = :idbv", [id])
             r = cursor.fetchone()
-            app.logger.warning("Probe: %s" % request.args.get('probe','NO-PROBE'))
             return r[0] if r is not None else "Unknown user id"
 
 #------------------------------------------------------------------------------
