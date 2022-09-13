@@ -13,7 +13,7 @@ function hatest_result() {
 }
 "
 export -f hatest_result
-
+env
 for app in ${apps[@]}
 do
   $HATEST_CODE/app_run.sh "$batch_name" "$app" "$outages" >>$log 2>&1
