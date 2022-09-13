@@ -6,9 +6,11 @@ sleep 20
 hatest_set_phase outage
 hatest_result_app_outage plan_inject
 ./inject.sh &
-sleep 20
+sleep 60
 hatest_set_phase recovery
 hatest_result_app_outage plan_recover
 ./recover.sh &
-sleep 20
+sleep 60
+hatest_set_phase rampdown
+sleep 10
 hatest_result_app_outage plan_end
