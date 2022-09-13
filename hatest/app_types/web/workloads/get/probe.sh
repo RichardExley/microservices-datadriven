@@ -2,7 +2,7 @@ probe_number="$1"
 hatest_result_app_outage "client_send $probe_number get_1"
 HATEST_APP_URL='http://127.0.0.1:8080/user/1'
 # get output, append HTTP status code in separate line, discard error message
-OUT=$( curl -qSfsw '\n%{http_code}' "$HATEST_APP_URL" ) 2>/dev/null
+OUT=$( curl --max-time 5 -qSfsw '\n%{http_code}' "$HATEST_APP_URL" ) 2>/dev/null
 
 # get exit code
 RET=$?
