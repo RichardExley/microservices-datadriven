@@ -12,7 +12,7 @@ eval "function hatest_result_app_outage() {
 export -f hatest_result_app_outage
 
 # Start the app
-cd $HATEST_CODE/app_types/$app_type/$impl
+cd $HATEST_CODE/app_types/$app_type/impl/$impl
 ./startup.sh
 
 # Start the workload (async)
@@ -27,5 +27,5 @@ cd $HATEST_PLATFORM_CODE/outages
 wait
 
 # Reset the app
-cd $HATEST_CODE/app_types/$app_type/$impl
+cd $HATEST_CODE/app_types/$app_type/impl/$impl
 ./reset.sh
