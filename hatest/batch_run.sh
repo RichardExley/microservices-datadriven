@@ -8,7 +8,7 @@ log="$HATEST_LOG_DIR/${batch_name}.log"
 eval "
 function hatest_result() {
   local entry="'"$1"'"
-  local current_epoch=$(date +%s.%N)
+  local current_epoch="'$(date +%s.%N)'"
   echo "'"'"$batch_name "'$current_epoch $entry"'" >> $results_file
 }
 "
