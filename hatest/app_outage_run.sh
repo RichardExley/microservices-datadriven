@@ -1,6 +1,8 @@
 batch_name="$1"
-app="$2"
-outage="$3"
+app_type="$2"
+impl="$3"
+workload="$4"
+outage="$5"
 
 eval "function hatest_result_app_outage() {
   local entry="'"$1"'"
@@ -10,11 +12,11 @@ eval "function hatest_result_app_outage() {
 export -f hatest_result_app_outage
 
 # Start the app
-cd $HATEST_APP_TYPE_CODE/impl/$app
+cd $HATEST_CODE/app_types/$app_type/$impl
 ./startup.sh
 
 # Start the workload (async)
-cd $HATEST_WORKLOAD_CODE
+cd $HATEST_CODE/app_types/$app_type/workloads/$workload
 ./start.sh &
 
 # Start the outage plan (async)
@@ -25,5 +27,5 @@ cd $HATEST_PLATFORM_CODE/outages
 wait
 
 # Reset the app
-cd $HATEST_APP_TYPE_CODE/impl/$app
+cd $HATEST_CODE/app_types/$app_type/$impl
 ./reset.sh
