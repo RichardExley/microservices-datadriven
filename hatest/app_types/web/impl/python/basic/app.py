@@ -46,18 +46,18 @@ def index():
     return "Welcome to the demo app"
 
 # Show name of thing
-@app.route("/thing/<int:id>")
-def get_thing_by_id(thing_id):
+@app.route("/user/<int:id>")
+def get_user_by_id(id):
     app.logger.warning("Probe: %s" % request.args.get('probe','NO-PROBE'))
-    sql = "select id, name from thing where id = :id"
+    sql = "select username from demo where id = :idbv"
     conn = oracledb.connect(user=sample_env.get_main_user(),
                             password=sample_env.get_main_password(),
                             dsn=sample_env.get_connect_string())
     cursor = conn.cursor()
-    cursor.execute(sql, [thing_id])
-    thing = cursor.fetchone()
+    cursor.execute(sql, [id])
+    r = cursor.fetchone()
     conn.close()
-    return thing[0] if thing is not None else "UNKNOWN"
+    return r[0] if r is not None else "UNKNOWN"
 
 #------------------------------------------------------------------------------
 
