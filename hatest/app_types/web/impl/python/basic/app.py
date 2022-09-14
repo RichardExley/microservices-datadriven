@@ -5,14 +5,6 @@ import logging
 from flask import Flask, request
 import oracledb
 import sample_env
-import simplejson
-
-# Dict Factory for Rows
-def makeDictFactory(cursor):
-    columnNames = [d[0] for d in cursor.description]
-    def createRow(*args):
-        return dict(zip(columnNames, args))
-    return createRow
 
 # create_schema(): drop and create the demo table, and add a row
 def create_schema():
@@ -55,10 +47,9 @@ def get_thing_by_id(thing_id):
     conn = oracledb.connect(sample_env.get_main_connect_string())
     cursor = conn.cursor()
     cursor.execute(sql, [thing_id])
-    cursor.rowfactory = makeDictFactory(cursor)
     thing = cursor.fetchone()
     conn.close()
-    return simplejson.dumps(thing)
+    return thing[0] if thing is not None else "UNKNOWN"
 
 #------------------------------------------------------------------------------
 
