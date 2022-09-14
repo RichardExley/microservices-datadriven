@@ -77,7 +77,6 @@ def start_pool():
                                 min=pool_min,
                                 max=pool_max,
                                 increment=pool_inc,
-                                session_callback=init_session,
                                 getmode=oracledb.POOL_GETMODE_NOWAIT)
 
     return pool
