@@ -8,7 +8,7 @@ import sample_env
 
 # create_schema(): drop and create the demo table, and add a row
 def create_schema():
-    with oracledb.connect(  user=sample_env.get_main_user(),
+    with oracledb.connect(user=sample_env.get_main_user(),
                             password=sample_env.get_main_password(),
                             dsn=sample_env.get_connect_string()) as connection:
         with connection.cursor() as cursor:
@@ -60,7 +60,7 @@ def get_thing_by_id(thing_id):
 if __name__ == '__main__':
 
     # Create a demo table
-    create_schema()
+    # create_schema()
 
     # Start a webserver
     app.run(port=port)
