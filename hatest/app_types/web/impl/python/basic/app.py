@@ -6,6 +6,9 @@ from flask import Flask, request
 import oracledb
 import sample_env
 
+# Port to listen on
+port=int(os.environ.get('PORT', '8080'))
+
 # create_schema(): drop and create the demo table, and add a row
 def create_schema():
     with oracledb.connect(user=sample_env.get_main_user(),
