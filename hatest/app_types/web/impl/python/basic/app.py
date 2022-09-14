@@ -8,7 +8,9 @@ import sample_env
 
 # create_schema(): drop and create the demo table, and add a row
 def create_schema():
-    with oracledb.connect(sample_env.get_main_connect_string()) as connection:
+    with oracledb.connect(  user=sample_env.get_main_user(),
+                            password=sample_env.get_main_password(),
+                            dsn=sample_env.get_connect_string()) as connection:
         with connection.cursor() as cursor:
             cursor.execute("""
                 begin
@@ -44,7 +46,9 @@ def index():
 def get_thing_by_id(thing_id):
     app.logger.warning("Probe: %s" % request.args.get('probe','NO-PROBE'))
     sql = "select id, name from thing where id = :id"
-    conn = oracledb.connect(sample_env.get_main_connect_string())
+    conn = oracledb.connect(user=sample_env.get_main_user(),
+                            password=sample_env.get_main_password(),
+                            dsn=sample_env.get_connect_string())
     cursor = conn.cursor()
     cursor.execute(sql, [thing_id])
     thing = cursor.fetchone()
