@@ -10,6 +10,10 @@ import sample_env
 # Port to listen on
 port=int(os.environ.get('PORT', '8080'))
 
+# determine whether to use python-oracledb thin mode or thick mode
+if not sample_env.get_is_thin():
+    oracledb.init_oracle_client(lib_dir=sample_env.get_oracle_client())
+
 # create_schema(): drop and create the demo table, and add a row
 def create_schema():
     with oracledb.connect(user=sample_env.get_main_user(),
@@ -49,9 +53,6 @@ def index():
 @app.route("/user/<int:id>")
 def get_user_by_id(id):
     app.logger.warning("Probe: %s" % request.args.get('probe','NO-PROBE'))
-    app.logger.warning("USER: %s" % sample_env.get_main_user())
-    app.logger.warning("PASSWORD: %s" % sample_env.get_main_password())
-    app.logger.warning("DSN: %s" % sample_env.get_connect_string())
     sql = "select username from demo where id = :idbv"
     conn = oracledb.connect(user=sample_env.get_main_user(),
                             password=sample_env.get_main_password(),
