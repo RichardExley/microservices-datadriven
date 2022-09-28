@@ -10,4 +10,4 @@ return_code=$?
 http_status="$(echo "$OUT" | tail -n1 )"
 latency="$(echo "$OUT" | tail -n2 | head -n1 )"
 
-hatest_result_app_outage "action=client_response probe=$probe_number status="'"'latency=$latency http_status=$http_status return_code=$return_code'"'
+hatest_result_app_outage "action=client_response probe=$probe_number latency=$latency http_status=$http_status return_code=$return_code"
