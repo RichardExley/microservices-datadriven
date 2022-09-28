@@ -8,4 +8,4 @@ OUT=$( curl --max-time 5 -qSfsw '\n%{time_total} %{http_code}' "${HATEST_APP_URL
 RET=$?
 
 status="$(echo "$OUT" | tail -n1 ) $RET"
-hatest_result_app_outage "action=client_response probe $probe_number status="'"'"$status"'"'
+hatest_result_app_outage "action=client_response probe=$probe_number status="'"'"$status"'"'
