@@ -23,7 +23,7 @@ function hatest_result() {
   local entry="'"$1"'"
   local current_epoch="'$(date +%s.%N)'"
   local phase="'$(hatest_get_phase)'"
-  echo "'"'"{batch_name=$batch_name app_type=$app_type workload=$workload "'epoch=$current_epoch phase=$phase $entry}"'" >> $results_file
+  echo "'"'"batch_name=$batch_name app_type=$app_type workload=$workload "'epoch=$current_epoch phase=$phase $entry"'" >> $results_file
 }
 "
 export -f hatest_result
