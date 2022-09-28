@@ -6,7 +6,7 @@ outages="$5"
 
 eval "function hatest_result_app() {
   local entry="'"$1"'"
-  hatest_result "'"'"$impl "'$entry"'"
+  hatest_result "'"'"impl=$impl "'$entry"'"
 }
 "
 export -f hatest_result_app
