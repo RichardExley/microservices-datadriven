@@ -76,7 +76,8 @@ def start_pool():
                                 dsn=sample_env.get_connect_string(),
                                 min=pool_min,
                                 max=pool_max,
-                                increment=pool_inc)
+                                increment=pool_inc,
+                                getmode=oracledb.POOL_GETMODE_NOWAIT)
 
     return pool
 
