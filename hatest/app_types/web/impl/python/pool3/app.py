@@ -66,15 +66,14 @@ class myPool(oracledb.ConnectionPool):
         pool_min = 4
         pool_max = 4
         pool_inc = 0
-
-        self = oracledb.create_pool(user=sample_env.get_main_user(),
-                                    password=sample_env.get_main_password(),
-                                    dsn=sample_env.get_connect_string(),
-                                    min=pool_min,
-                                    max=pool_max,
-                                    increment=pool_inc,
-                                    getmode=oracledb.POOL_GETMODE_NOWAIT)
-
+        super().__init__(
+            user=sample_env.get_main_user(),
+            password=sample_env.get_main_password(),
+            dsn=sample_env.get_connect_string(),
+            min=pool_min,
+            max=pool_max,
+            increment=pool_inc,
+            getmode=oracledb.POOL_GETMODE_NOWAIT)
 
 # start_pool(): starts the connection pool
 def start_pool():
