@@ -62,7 +62,7 @@ if not sample_env.get_is_thin():
 #------------------------------------------------------------------------------
 
 class myPool(oracledb.ConnectionPool):
-    def __init__(self, fname, lname):
+    def __init__(self):
         pool_min = 4
         pool_max = 4
         pool_inc = 0
