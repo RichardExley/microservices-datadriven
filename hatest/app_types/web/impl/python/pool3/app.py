@@ -75,13 +75,27 @@ class myPool(oracledb.ConnectionPool):
             increment=pool_inc,
             getmode=oracledb.POOL_GETMODE_NOWAIT)
 
-# start_pool(): starts the connection pool
-def start_pool():
-
-    # Generally a fixed-size pool is recommended, i.e. pool_min=pool_max.  Here
-    # the pool contains 4 connections, which will allow 4 concurrent users.
-
-    return myPool()
+    def acquire():
+        try:
+            conn = super().acquire()
+        
+            if pool:
+        try:
+            conn = pool.acquire()
+        except cx_Oracle.DatabaseError as e:
+            error, = e.args
+            # ORA-12514: TNS:listener does not currently know of service requested in connect descriptor
+            # ORA-12757: instance does not currently know of requested service
+            # ORA-12541: TNS:no listener
+            if error.code in [12514, 12757, 12541]:
+                reportDown(error.code)
+                raise DatabaseDown()
+            else:
+                raise
+        else:
+            return conn
+    else:
+        raise DatabaseDown()
 
 # create_schema(): drop and create the demo table, and add a row
 def create_schema():
@@ -131,7 +145,7 @@ def show_username(id):
 if __name__ == '__main__':
 
     # Start a pool of connections
-    pool = start_pool()
+    pool = myPool()
 
     # Create a demo table
     create_schema()

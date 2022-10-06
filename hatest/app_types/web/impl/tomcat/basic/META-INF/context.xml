@@ -1,0 +1,9 @@
+<Context> 
+<Resource name="jdbc/orcljdbc_ds" auth="Container"
+   type="javax.sql.DataSource" 
+   driverClassName="oracle.jdbc.OracleDriver"
+   username="admin" 
+   password="Welcome12345" 
+   url="jdbc:oracle:thin:@y34inqwaehlt45np_tp?TNS_ADMIN=~/tns_admin"   
+
+/>
