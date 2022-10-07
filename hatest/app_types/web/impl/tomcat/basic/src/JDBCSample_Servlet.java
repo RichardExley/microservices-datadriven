@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class JDBCSample_Servlet
  */
-@WebServlet("/user/*")
+@WebServlet("/*")
 public class JDBCSample_Servlet extends HttpServlet {
   private static final long serialVersionUID = 1L;     
     /**
@@ -35,25 +35,28 @@ public class JDBCSample_Servlet extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
+    String id = request.getPathInfo().split("/")[1];
+    String sql = "select username from demo where id = ?"; 
     PrintWriter out = response.getWriter();
-    out.print(request.getPathInfo());
     try {
       // Get a context for the JNDI look up
       DataSource ds = getDataSource();
       // With AutoCloseable, the connection is closed automatically.
-      try (Connection connection = ds.getConnection()) {
-        for (int i=0; i<10; i++) {
-          out.println("The database user is" 
-             + executeBusinessLogicOnDatabase(connection, out));
+      try (Connection conn = ds.getConnection()) {
+        OraclePreparedStatement stmt = (OraclePreparedStatement) conn.createStatement(sql); 
+        stmt.setString(1, id);
+        ResultSet rs = stmt.executeQuery(); 
+        if (rs.next(()) {
+          response.setStatus(200);
+          return rs.getString(1);
+        } else {
+          response.setStatus(201);
+          return null;
         }
-        out.print("\n Sample JDBC Servlet Request was successful");
-        response.setStatus(200);
       }
     } catch (Exception e) {
       response.setStatus(500);
       response.setHeader("Exception", e.toString());
-      out.print("\n Web Request failed");
-      out.print("\n "+e.toString());
       e.printStackTrace();
     }
   }
