@@ -49,10 +49,9 @@ public class JDBCSample_Servlet extends HttpServlet {
         ResultSet rs = stmt.executeQuery(); 
         if (rs.next()) {
           response.setStatus(200);
-          return rs.getString(1);
+          out.println(rs.getString(1));
         } else {
           response.setStatus(201);
-          return null;
         }
       }
     } catch (Exception e) {
