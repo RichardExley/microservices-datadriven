@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class JDBCSample_Servlet
  */
-@WebServlet("/JDBCSample_Servlet")
+c("/user/*")
 public class JDBCSample_Servlet extends HttpServlet {
   private static final long serialVersionUID = 1L;     
     /**
@@ -36,7 +36,7 @@ public class JDBCSample_Servlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
     PrintWriter out = response.getWriter();
-    out.print("Sample JDBC Servlet");
+    out.print(request.getPathInfo());
     try {
       // Get a context for the JNDI look up
       DataSource ds = getDataSource();
