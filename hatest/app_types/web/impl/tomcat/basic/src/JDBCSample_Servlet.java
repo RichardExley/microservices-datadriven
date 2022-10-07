@@ -46,7 +46,7 @@ public class JDBCSample_Servlet extends HttpServlet {
         OraclePreparedStatement stmt = (OraclePreparedStatement) conn.createStatement(sql); 
         stmt.setString(1, id);
         ResultSet rs = stmt.executeQuery(); 
-        if (rs.next() {
+        if (rs.next()) {
           response.setStatus(200);
           return rs.getString(1);
         } else {
