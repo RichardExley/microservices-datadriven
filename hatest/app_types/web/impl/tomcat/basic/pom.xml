@@ -13,7 +13,6 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
-
   <dependencies>
    <dependency>
      <groupId>javax.servlet</groupId>
@@ -45,17 +44,9 @@
       <artifactId>osdt_cert</artifactId>
       <version>19.16.0.0</version>
     </dependency>
-
   </dependencies>
 
-
   <build>
-    <sourceDirectory>src</sourceDirectory>
-    <resources>
-        <resource>
-            <directory>META-INF</directory>
-        </resource>
-    </resources>
     <plugins>
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -66,15 +57,14 @@
             </configuration>
         </plugin>
  
-        <!-- Tomcat plugin-->
- 
+        <!-- Tomcat plugin--> 
         <plugin>
             <groupId>org.apache.tomcat.maven</groupId>
             <artifactId>tomcat7-maven-plugin</artifactId>
             <version>2.2</version>
             <configuration>
-                <port>8080</port>   //Configure port number
-                <path>/user</path>   //Configure application root URL
+                <port>8080</port>
+                <path>/user</path>
                 <contextFile>META-INF/context.xml</contextFile>
             </configuration>
         </plugin>

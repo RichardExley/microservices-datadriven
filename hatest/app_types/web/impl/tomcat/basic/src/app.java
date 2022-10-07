@@ -75,28 +75,6 @@ public class JDBCSample_Servlet extends HttpServlet {
     return ds;
   }
 
- /*
-  * Method to showcase database operations using the database connection 
-  */
-  private String executeBusinessLogicOnDatabase(Connection conn, 
-    PrintWriter out) throws SQLException {
-    // Get the JDBC driver name and version 
-    DatabaseMetaData dbmd = conn.getMetaData();       
-    out.println("Driver Name: " + dbmd.getDriverName());
-    out.println("Driver Version: " + dbmd.getDriverVersion());
-    
-    String user = null;	
-    String query = "select user from dual"; 
-    Statement stmt = conn.createStatement(); 
-    ResultSet rs = stmt.executeQuery(query); 
-    while (rs.next()) { 
-     user = rs.getString(1);
-    }          
-    stmt.close();
-    rs.close();
-    return user;
-  }
-
   public void destroy() { }
   
 }
