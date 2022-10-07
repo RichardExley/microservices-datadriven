@@ -70,6 +70,7 @@
             <configuration>
                 <port>8080</port>   //Configure port number
                 <path>/JDBCSample</path>   //Configure application root URL
+                <contextFile>META-INF/context.xml</contextFile>
             </configuration>
         </plugin>
  
