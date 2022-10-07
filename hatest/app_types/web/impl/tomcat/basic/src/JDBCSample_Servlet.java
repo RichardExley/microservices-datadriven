@@ -43,7 +43,7 @@ public class JDBCSample_Servlet extends HttpServlet {
       DataSource ds = getDataSource();
       // With AutoCloseable, the connection is closed automatically.
       try (Connection conn = ds.getConnection()) {
-        OraclePreparedStatement stmt = (OraclePreparedStatement) conn.createStatement(sql); 
+        PreparedStatement stmt = conn.prepareStatement(sql); 
         stmt.setString(1, id);
         ResultSet rs = stmt.executeQuery(); 
         if (rs.next()) {
