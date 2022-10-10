@@ -1,5 +1,5 @@
 hatest_result_app_outage 'action=reset_start'
-if test -f ~/.web_python.pid; then
+if test -f ~/.tomcat.pid; then
   kill -9 "$(<~/.web_python.pid)"
   rm ~/.tomcat.pid
 fi
