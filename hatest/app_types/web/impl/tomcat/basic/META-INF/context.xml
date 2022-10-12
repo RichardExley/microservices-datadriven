@@ -3,7 +3,7 @@
    type="javax.sql.DataSource" 
    driverClassName="oracle.jdbc.OracleDriver"
    username="admin" 
-   password="Welcome12345" 
+   password="Welcome123456" 
    url="jdbc:oracle:thin:@y34inqwaehlt45np_tp?TNS_ADMIN=/home/richard_ex/tns_admin"   
 />
 </Context>
