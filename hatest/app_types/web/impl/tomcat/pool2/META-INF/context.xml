@@ -7,7 +7,7 @@
    minPoolSize="4"
    maxPoolSize="4"
    initialPoolSize="4"
-   username="admin" 
+   user="admin" 
    password="Welcome123456" 
    url="jdbc:oracle:thin:@y34inqwaehlt45np_tp?TNS_ADMIN=/home/richard_ex/tns_admin"   
  />
