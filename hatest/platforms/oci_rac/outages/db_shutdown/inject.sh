@@ -1,1 +1,0 @@
-oci db autonomous-database stop --autonomous-database-id "$HATEST_DB_ADB_OCID"
