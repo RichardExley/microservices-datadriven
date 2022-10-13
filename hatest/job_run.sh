@@ -33,6 +33,7 @@ function hatest_result() {
 "
 export -f hatest_result
 
+echo "Starting job $job_name"
 hatest_set_phase batch_start
 
 $HATEST_CODE/app_run.sh "$job_name" "$app_type" "$workload" "$outage" "$impl" "$impl_ver" >>${HATEST_APP_LOG} 2>&1
