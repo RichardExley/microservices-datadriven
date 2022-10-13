@@ -1,0 +1,39 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://${HATEST_TESTBED_IP}:3100/loki/api/v1/push
+
+scrape_configs:
+- job_name: results
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job_name: ${HATEST_JOB_NAME}
+      __path__: ${HATEST_RESULTS_LOG}
+  pipeline_stages:
+  - logfmt:
+      mapping:
+        epoch: timestamp
+  - timestamp:
+      format: Unix
+      source: timestamp  
+- job_name: app
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job_name: ${HATEST_JOB_NAME}
+      __path__: ${HATEST_APP_LOG}
+- job_name: job_meta
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job_name: ${HATEST_JOB_NAME}
+      __path__: ${HATEST_JOB_META_LOG}
