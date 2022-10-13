@@ -15,6 +15,7 @@ scrape_configs:
       - localhost
     labels:
       job_name: ${HATEST_JOB_NAME}
+      log: results
       __path__: ${HATEST_RESULTS_LOG}
   pipeline_stages:
   - logfmt:
@@ -29,6 +30,7 @@ scrape_configs:
       - localhost
     labels:
       job_name: ${HATEST_JOB_NAME}
+      log: app
       __path__: ${HATEST_APP_LOG}
 - job_name: job_meta
   static_configs:
@@ -36,4 +38,5 @@ scrape_configs:
       - localhost
     labels:
       job_name: ${HATEST_JOB_NAME}
+      log: job_meta
       __path__: ${HATEST_JOB_META_LOG}
