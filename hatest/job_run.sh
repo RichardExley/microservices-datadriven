@@ -1,11 +1,11 @@
 app_type="$1"
 workload="$2"
-outages="$3"
+outage="$3"
 impl="$4"
 impl_ver="$5"
 
 job_id=`date +'%Y%m%d%H%m'`
-job_name=${job_id}-{$HATEST_PLATFORM}-${app_type}-${workload}-${outage}-${impl}-${impl_ver}
+job_name=${job_id}-${HATEST_PLATFORM}-${app_type}-${workload}-${outage}-${impl}-${impl_ver}
 
 # Start Promtail
 $HATEST_CODE/promtail_start.sh
