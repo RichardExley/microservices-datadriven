@@ -6,6 +6,7 @@ impl_ver="$5"
 
 job_id=`date +'%Y%m%d%H%m'`
 job_name=${job_id}-${HATEST_PLATFORM}-${app_type}-${workload}-${outage}-${impl}-${impl_ver}
+export HATEST_JOB_NAME="$job_name"
 
 # Start Promtail
 $HATEST_CODE/promtail_start.sh
