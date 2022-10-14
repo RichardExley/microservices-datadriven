@@ -68,7 +68,7 @@ def get_user_by_id(id):
 if __name__ == '__main__':
 
     # Create a demo table
-    # create_schema()
+    create_schema()
 
     # Start a webserver
     app.run(port=port)
