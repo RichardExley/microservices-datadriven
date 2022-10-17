@@ -37,6 +37,15 @@ public class JDBCSample_Servlet extends HttpServlet {
     super();
   }
 
+  public void init() {
+    // Load JDBC driver
+    try {
+      Class.forName("oracle.jdbc.OracleDriver");
+    } catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
+  }
+  
   /**
    * Method to get a connection to the Oracle Database and perform few 
    * database operations and display the results on a web page. 
@@ -47,11 +56,7 @@ public class JDBCSample_Servlet extends HttpServlet {
     String sql = "select username from demo where id = ?"; 
     PrintWriter out = response.getWriter();
     try {
-      Class.forName ("oracle.jdbc.OracleDriver");
-      // Get a context for the JNDI look up
-      //DataSource ds = getDataSource();
-      // With AutoCloseable, the connection is closed automatically.
-      try (Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword)) {
+       try (Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword)) {
         PreparedStatement stmt = conn.prepareStatement(sql); 
         stmt.setString(1, id);
         ResultSet rs = stmt.executeQuery(); 
