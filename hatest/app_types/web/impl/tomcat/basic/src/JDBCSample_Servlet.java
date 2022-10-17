@@ -42,12 +42,12 @@ public class JDBCSample_Servlet extends HttpServlet {
    * database operations and display the results on a web page. 
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
-           throws ServletException, IOException, ClassNotFoundException {
+           throws ServletException, IOException {
     String id = request.getPathInfo().split("/")[1];
     String sql = "select username from demo where id = ?"; 
     PrintWriter out = response.getWriter();
-    Class.forName ("oracle.jdbc.OracleDriver");
     try {
+      Class.forName ("oracle.jdbc.OracleDriver");
       // Get a context for the JNDI look up
       //DataSource ds = getDataSource();
       // With AutoCloseable, the connection is closed automatically.
