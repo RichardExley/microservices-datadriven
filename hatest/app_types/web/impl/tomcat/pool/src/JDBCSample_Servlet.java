@@ -42,7 +42,7 @@ public class JDBCSample_Servlet extends HttpServlet {
   
     // Load JDBC driver
     try {
-      PoolDataSource  pds = PoolDataSourceFactory.getPoolDataSource();
+      pds = PoolDataSourceFactory.getPoolDataSource();
       pds.setConnectionFactoryClassName("oracle.jdbc.pool.OracleDataSource");
       pds.setURL(dbURL);
       pds.setUser(dbUser);
