@@ -34,7 +34,6 @@ public class JDBCSample_Servlet extends HttpServlet {
     * @see HttpServlet#HttpServlet()
     */
   public JDBCSample_Servlet() {
-    DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
     super();
   }
 
@@ -47,6 +46,7 @@ public class JDBCSample_Servlet extends HttpServlet {
     String id = request.getPathInfo().split("/")[1];
     String sql = "select username from demo where id = ?"; 
     PrintWriter out = response.getWriter();
+    Class.forName ("oracle.jdbc.OracleDriver");
     try {
       // Get a context for the JNDI look up
       //DataSource ds = getDataSource();
