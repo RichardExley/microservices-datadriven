@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.sql.DriverManager;
+
 /**
  * Servlet implementation class JDBCSample_Servlet
  */
@@ -32,7 +34,8 @@ public class JDBCSample_Servlet extends HttpServlet {
     * @see HttpServlet#HttpServlet()
     */
   public JDBCSample_Servlet() {
-      super();
+    DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
+    super();
   }
 
   /**
@@ -46,9 +49,9 @@ public class JDBCSample_Servlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     try {
       // Get a context for the JNDI look up
-      DataSource ds = getDataSource();
+      //DataSource ds = getDataSource();
       // With AutoCloseable, the connection is closed automatically.
-      try (Connection conn = ds.getConnection(dbURL, dbUser, dbPassword)) {
+      try (Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword)) {
         PreparedStatement stmt = conn.prepareStatement(sql); 
         stmt.setString(1, id);
         ResultSet rs = stmt.executeQuery(); 
