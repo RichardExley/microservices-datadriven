@@ -1,23 +1,17 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
-import javax.sql.DataSource;
-import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.sql.DriverManager;
 
 /**
  * Servlet implementation class JDBCSample_Servlet
@@ -46,12 +40,6 @@ public class JDBCSample_Servlet extends HttpServlet {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    /*try {
-      Class.forName("oracle.jdbc.OracleDriver");
-    } catch (ClassNotFoundException e) {
-      e.printStackTrace();
-    }
-    */
   }
   
   /**
@@ -60,8 +48,10 @@ public class JDBCSample_Servlet extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
-    String id = request.getPathInfo().split("/")[1];
     PrintWriter out = response.getWriter();
+
+    // Get the id requested
+    String id = request.getPathInfo().split("/")[1];
 
     try (Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword)) {
       PreparedStatement stmt = conn.prepareStatement(get_id_sql); 
