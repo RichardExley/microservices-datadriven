@@ -66,7 +66,7 @@ public class JDBCSample_Servlet extends HttpServlet {
     }
   }
 
- /*
+  /*
   * Method to create a datasource after the JNDI lookup
   */
 
@@ -77,7 +77,6 @@ public class JDBCSample_Servlet extends HttpServlet {
     // Look up a data source
     javax.sql.DataSource ds
           = (javax.sql.DataSource) envContext.lookup ("jdbc/orcljdbc_ds");
-          ds.
     return ds;
   }
 
