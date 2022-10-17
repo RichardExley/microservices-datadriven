@@ -29,7 +29,7 @@ public class JDBCSample_Servlet extends HttpServlet {
   static String dbUser     = System.getenv("HATEST_DB_MAIN_USER");
   static String dbURL      = System.getenv("HATEST_JDBC_URL");
 
-  PoolDataSource pds;
+  static PoolDataSource pds;
 
   /**
     * @see HttpServlet#HttpServlet()
