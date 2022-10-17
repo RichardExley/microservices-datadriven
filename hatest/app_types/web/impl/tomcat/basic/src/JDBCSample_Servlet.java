@@ -42,7 +42,7 @@ public class JDBCSample_Servlet extends HttpServlet {
    * database operations and display the results on a web page. 
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
-           throws ServletException, IOException {
+           throws ServletException, IOException, ClassNotFoundException {
     String id = request.getPathInfo().split("/")[1];
     String sql = "select username from demo where id = ?"; 
     PrintWriter out = response.getWriter();
