@@ -26,6 +26,8 @@ import java.sql.DriverManager;
 public class JDBCSample_Servlet extends HttpServlet {
   private static final long serialVersionUID = 1L;     
 
+  static String get_id_sql = "select username from demo where id = ?"; 
+
   static String dbPassword = System.getenv("HATEST_DB_MAIN_PASSWORD");
   static String dbUser     = System.getenv("HATEST_DB_MAIN_USER");
   static String dbURL      = System.getenv("HATEST_JDBC_URL");
@@ -39,11 +41,13 @@ public class JDBCSample_Servlet extends HttpServlet {
 
   public void init() {
     // Load JDBC driver
-    try {
+    DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
+    /*try {
       Class.forName("oracle.jdbc.OracleDriver");
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
     }
+    */
   }
   
   /**
@@ -53,19 +57,17 @@ public class JDBCSample_Servlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
     String id = request.getPathInfo().split("/")[1];
-    String sql = "select username from demo where id = ?"; 
     PrintWriter out = response.getWriter();
-    try {
-       try (Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword)) {
-        PreparedStatement stmt = conn.prepareStatement(sql); 
-        stmt.setString(1, id);
-        ResultSet rs = stmt.executeQuery(); 
-        if (rs.next()) {
-          response.setStatus(200);
-          out.println(rs.getString(1));
-        } else {
-          response.setStatus(201);
-        }
+
+    try (Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword)) {
+      PreparedStatement stmt = conn.prepareStatement(get_id_sql); 
+      stmt.setString(1, id);
+      ResultSet rs = stmt.executeQuery(); 
+      if (rs.next()) {
+        response.setStatus(200);
+        out.println(rs.getString(1));
+      } else {
+        response.setStatus(201);
       }
     } catch (Exception e) {
       response.setStatus(500);
@@ -74,20 +76,5 @@ public class JDBCSample_Servlet extends HttpServlet {
     }
   }
 
-  /*
-  * Method to create a datasource after the JNDI lookup
-  */
-
-  private DataSource getDataSource() throws NamingException {
-    Context ctx;
-    ctx = new InitialContext();
-    Context envContext = (Context) ctx.lookup("java:/comp/env");
-    // Look up a data source
-    javax.sql.DataSource ds
-          = (javax.sql.DataSource) envContext.lookup ("jdbc/orcljdbc_ds");
-    return ds;
-  }
-
   public void destroy() { }
-  
 }
