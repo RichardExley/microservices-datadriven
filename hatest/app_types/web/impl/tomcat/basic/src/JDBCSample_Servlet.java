@@ -23,12 +23,17 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/*")
 public class JDBCSample_Servlet extends HttpServlet {
   private static final long serialVersionUID = 1L;     
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public JDBCSample_Servlet() {
-        super();
-    }
+
+  static String dbPassword = System.getenv("HATEST_DB_MAIN_PASSWORD");
+  static String dbUser     = System.getenv("HATEST_DB_MAIN_USER");
+  static String dbURL      = System.getenv("HATEST_JDBC_URL");
+
+  /**
+    * @see HttpServlet#HttpServlet()
+    */
+  public JDBCSample_Servlet() {
+      super();
+  }
 
   /**
    * Method to get a connection to the Oracle Database and perform few 
@@ -43,7 +48,7 @@ public class JDBCSample_Servlet extends HttpServlet {
       // Get a context for the JNDI look up
       DataSource ds = getDataSource();
       // With AutoCloseable, the connection is closed automatically.
-      try (Connection conn = ds.getConnection()) {
+      try (Connection conn = ds.getConnection(dbURL, dbUser, dbPassword)) {
         PreparedStatement stmt = conn.prepareStatement(sql); 
         stmt.setString(1, id);
         ResultSet rs = stmt.executeQuery(); 
@@ -72,6 +77,7 @@ public class JDBCSample_Servlet extends HttpServlet {
     // Look up a data source
     javax.sql.DataSource ds
           = (javax.sql.DataSource) envContext.lookup ("jdbc/orcljdbc_ds");
+          ds.
     return ds;
   }
 
