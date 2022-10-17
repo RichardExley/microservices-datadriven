@@ -41,7 +41,11 @@ public class JDBCSample_Servlet extends HttpServlet {
 
   public void init() {
     // Load JDBC driver
-    DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
+    try {
+      DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
     /*try {
       Class.forName("oracle.jdbc.OracleDriver");
     } catch (ClassNotFoundException e) {
