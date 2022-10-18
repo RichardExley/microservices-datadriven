@@ -50,6 +50,8 @@ public class JDBCSample_Servlet extends HttpServlet {
       pds.setMinPoolSize(4);
       pds.setMaxPoolSize(4);
       pds.setConnectionWaitTimeout(0);
+      int totalConnsCount = pds.getStatistics().getTotalConnectionsCount();
+      System.out.println("The total connection count in the pool before priming is "+ totalConnsCount +".");
       Connection conn1 = pds.getConnection();
       Connection conn2 = pds.getConnection();
       Connection conn3 = pds.getConnection();
@@ -58,6 +60,8 @@ public class JDBCSample_Servlet extends HttpServlet {
       conn2.close();
       conn3.close();
       conn4.close();
+      totalConnsCount = pds.getStatistics().getTotalConnectionsCount();
+      System.out.println("The total connection count in the pool after priming is "+ totalConnsCount +".");
     } catch (SQLException e) {
       e.printStackTrace();
     }
