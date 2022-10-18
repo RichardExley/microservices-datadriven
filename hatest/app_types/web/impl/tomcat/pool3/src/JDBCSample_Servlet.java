@@ -38,6 +38,8 @@ public class JDBCSample_Servlet extends HttpServlet {
   }
 
   public void init() {
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    System.out.println("init start: " + timestamp);
   
     // Load JDBC driver
     try {
@@ -50,13 +52,19 @@ public class JDBCSample_Servlet extends HttpServlet {
       pds.setMinPoolSize(4);
       pds.setMaxPoolSize(4);
       pds.setConnectionWaitTimeout(0);
-      //int totalConnsCount = pds.getStatistics().getTotalConnectionsCount();
+      timestamp = new Timestamp(System.currentTimeMillis());
+      System.out.println("init before connections: " + timestamp);
+    //int totalConnsCount = pds.getStatistics().getTotalConnectionsCount();
       System.out.println("Stats before priming are: " + pds.getStatistics());
       Connection conn1 = pds.getConnection();
+      timestamp = new Timestamp(System.currentTimeMillis());
+      System.out.println("init after conn1: " + timestamp);
       System.out.println("Stats after priming conn1 are: " + pds.getStatistics());
       Connection conn2 = pds.getConnection();
       Connection conn3 = pds.getConnection();
       Connection conn4 = pds.getConnection();
+      timestamp = new Timestamp(System.currentTimeMillis());
+      System.out.println("init after conn4: " + timestamp);
       PreparedStatement stmt = conn1.prepareStatement(get_id_sql); 
       stmt.setString(1, "1");
       ResultSet rs = stmt.executeQuery(); 
