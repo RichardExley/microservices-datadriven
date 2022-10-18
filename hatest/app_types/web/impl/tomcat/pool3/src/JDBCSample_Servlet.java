@@ -88,18 +88,25 @@ public class JDBCSample_Servlet extends HttpServlet {
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    System.out.println("goGet start: " + timestamp);
+  
     PrintWriter out = response.getWriter();
 
     // Get the id requested
     String id = request.getPathInfo().split("/")[1];
 
     try (Connection conn = pds.getConnection()) {
+      timestamp = new Timestamp(System.currentTimeMillis());
+      System.out.println("goGet after getConnection: " + timestamp);
       PreparedStatement stmt = conn.prepareStatement(get_id_sql); 
       stmt.setString(1, id);
       ResultSet rs = stmt.executeQuery(); 
       if (rs.next()) {
         response.setStatus(200);
         out.println(rs.getString(1));
+        timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println("goGet after 200 output: " + timestamp);
       } else {
         response.setStatus(201);
       }
