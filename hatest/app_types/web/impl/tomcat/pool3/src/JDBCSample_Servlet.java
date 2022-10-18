@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
-import oracle.ucp.OracleJDBCConnectionPoolStatistics;
 
 /**
  * Servlet implementation class JDBCSample_Servlet
