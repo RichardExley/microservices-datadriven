@@ -51,9 +51,13 @@ public class JDBCSample_Servlet extends HttpServlet {
       pds.setMaxPoolSize(4);
       pds.setConnectionWaitTimeout(0);
       Connection conn = pds.getConnection();
+      conn.close();
       conn = pds.getConnection();
+      conn.close();
       conn = pds.getConnection();
+      conn.close();
       conn = pds.getConnection();
+      conn.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
