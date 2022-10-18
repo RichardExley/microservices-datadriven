@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
+import oracle.ucp.OracleJDBCConnectionPoolStatistics;
 
 /**
  * Servlet implementation class JDBCSample_Servlet
@@ -50,8 +51,8 @@ public class JDBCSample_Servlet extends HttpServlet {
       pds.setMinPoolSize(4);
       pds.setMaxPoolSize(4);
       pds.setConnectionWaitTimeout(0);
-      int totalConnsCount = pds.getStatistics().getTotalConnectionsCount();
-      System.out.println("The total connection count in the pool before priming is "+ totalConnsCount +".");
+      //int totalConnsCount = pds.getStatistics().getTotalConnectionsCount();
+      System.out.println("Stats before priming are: " + pds.getStatistics().shortForm());
       Connection conn1 = pds.getConnection();
       Connection conn2 = pds.getConnection();
       Connection conn3 = pds.getConnection();
@@ -61,7 +62,7 @@ public class JDBCSample_Servlet extends HttpServlet {
       conn3.close();
       conn4.close();
       totalConnsCount = pds.getStatistics().getTotalConnectionsCount();
-      System.out.println("The total connection count in the pool after priming is "+ totalConnsCount +".");
+      System.out.println("Stats after priming are: " + pds.getStatistics().shortForm());
     } catch (SQLException e) {
       e.printStackTrace();
     }
