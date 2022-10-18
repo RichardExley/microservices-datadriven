@@ -53,9 +53,14 @@ public class JDBCSample_Servlet extends HttpServlet {
       //int totalConnsCount = pds.getStatistics().getTotalConnectionsCount();
       System.out.println("Stats before priming are: " + pds.getStatistics());
       Connection conn1 = pds.getConnection();
+      System.out.println("Stats after priming conn1 are: " + pds.getStatistics());
       Connection conn2 = pds.getConnection();
       Connection conn3 = pds.getConnection();
       Connection conn4 = pds.getConnection();
+      PreparedStatement stmt = conn1.prepareStatement(get_id_sql); 
+      stmt.setString(1, "1");
+      ResultSet rs = stmt.executeQuery(); 
+      rs.next();
       conn1.close();
       conn2.close();
       conn3.close();
