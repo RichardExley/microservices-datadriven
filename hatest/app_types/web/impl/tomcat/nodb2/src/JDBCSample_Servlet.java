@@ -22,8 +22,7 @@ public class JDBCSample_Servlet extends HttpServlet {
 
   public void init() {
     logger.setLevel(Level.ALL);
-
-    logger.debug("Starting JDBCSample_Servlet");
+    logger.info("Starting JDBCSample_Servlet");
   }
   
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,7 +30,7 @@ public class JDBCSample_Servlet extends HttpServlet {
     try {
       String id = request.getPathInfo().split("/")[1];
       String probe = request.getParameter("probe");
-      logger.debug("doGet: id: " + id + " probe: " + probe);
+      logger.info("doGet: id: " + id + " probe: " + probe);
 
       if (id.equals("1")) {
         response.setStatus(200);
