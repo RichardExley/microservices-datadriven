@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name="JDBCSample_Servlet", urlPatterns="/*", loadOnStartup=1)
-public class JDBCSample_Servlet extends HttpServlet {
+@WebServlet(name="MAA_Servlet", urlPatterns="/*", loadOnStartup=1)
+public class MAA_Servlet extends HttpServlet {
   private static final long serialVersionUID = 1L;     
-  private static Logger logger = Logger.getLogger("com.oracle.maa.tomcat.maaservlet");
+  private static Logger logger = Logger.getLogger("com.oracle.maa.tomcat.maa_servlet");
 
-  public JDBCSample_Servlet() {
+  public MAA_Servlet() {
     super();
   }
 
