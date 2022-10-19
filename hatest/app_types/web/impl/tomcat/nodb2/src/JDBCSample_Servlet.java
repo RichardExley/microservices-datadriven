@@ -20,7 +20,7 @@ public class JDBCSample_Servlet extends HttpServlet {
     try {
       String id = request.getPathInfo().split("/")[1];
       String probe = request.getParameter("probe");
-      System.out.println("doGet: id: " + id + " probe: " + probe);
+      // System.out.println("doGet: id: " + id + " probe: " + probe);
 
       if (id.equals("1")) {
         response.setStatus(200);
