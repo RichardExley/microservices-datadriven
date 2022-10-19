@@ -27,9 +27,12 @@ public class JDBCSample_Servlet extends HttpServlet {
   
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
+    String id = "";
+    String probe = "";
+
     try {
-      String id = request.getPathInfo().split("/")[1];
-      String probe = request.getParameter("probe");
+      id = request.getPathInfo().split("/")[1];
+      probe = request.getParameter("probe");
       logger.info("id: " + id + " probe: " + probe);
 
       if (id.equals("1")) {
