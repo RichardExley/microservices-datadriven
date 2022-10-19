@@ -66,6 +66,7 @@
             <configuration>
                 <port>8080</port>
                 <path>/user</path>
+                <webXml>web/WEB-INF/web.xml</webXml>
             </configuration>
         </plugin>
  
