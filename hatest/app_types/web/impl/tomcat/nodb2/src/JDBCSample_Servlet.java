@@ -30,7 +30,7 @@ public class JDBCSample_Servlet extends HttpServlet {
       String id = request.getPathInfo().split("/")[1];
       String probe = request.getParameter("probe");
       Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-      System.out.println(timestamp + " doGet: id: " + id + " probe: " + probe);
+      // System.out.println(timestamp + " doGet: id: " + id + " probe: " + probe);
 
       if (id.equals("1")) {
         response.setStatus(200);
