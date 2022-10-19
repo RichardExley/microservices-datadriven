@@ -1,3 +1,5 @@
+package com.oracle.maa;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
