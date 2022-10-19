@@ -1,9 +1,9 @@
-package com.oracle.maa;
+package com.oracle.maa.tomcat;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import java.sql.Timestamp;
+import java.util.logging.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,14 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name="JDBCSample_Servlet", urlPatterns="/*", loadOnStartup=1)
 public class JDBCSample_Servlet extends HttpServlet {
   private static final long serialVersionUID = 1L;     
+  private static Logger logger = Logger.getLogger("com.oracle.maa.tomcat.maaservlet");
 
   public JDBCSample_Servlet() {
     super();
   }
 
   public void init() {
-    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    System.out.println(timestamp + " Starting JDBCSample_Servlet");
+    logger.setLevel(Level.ALL);
+
+    logger.debug(timestamp + " Starting JDBCSample_Servlet");
   }
   
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,8 +31,7 @@ public class JDBCSample_Servlet extends HttpServlet {
     try {
       String id = request.getPathInfo().split("/")[1];
       String probe = request.getParameter("probe");
-      Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-      // System.out.println(timestamp + " doGet: id: " + id + " probe: " + probe);
+      logger.debug(timestamp + " doGet: id: " + id + " probe: " + probe);
 
       if (id.equals("1")) {
         response.setStatus(200);
