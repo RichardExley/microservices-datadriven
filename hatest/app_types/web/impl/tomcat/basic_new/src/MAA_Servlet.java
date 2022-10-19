@@ -60,7 +60,7 @@ public class MAA_Servlet extends HttpServlet {
       ResultSet rs = stmt.executeQuery(); 
       if (rs.next()) {
         response.setStatus(200);
-        out.println(rs.getString(1));
+        response.getWriter().println(rs.getString(1));
       } else {
         response.setStatus(201);
       }
