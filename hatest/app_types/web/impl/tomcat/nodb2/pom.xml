@@ -58,15 +58,6 @@
             </configuration>
         </plugin>
  
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.3.2</version>
-            <configuration>
-                <webXml>web/WEB-INF/web.xml</webXml>
-            </configuration>
-        </plugin>
-
         <!-- Tomcat plugin--> 
         <plugin>
             <groupId>org.apache.tomcat.maven</groupId>
@@ -75,6 +66,7 @@
             <configuration>
                 <port>8080</port>
                 <path>/user</path>
+                <tomcatWebXml>${project.basedir}/web/WEB-INF/web.xml</tomcatWebXml>
             </configuration>
         </plugin>
  
