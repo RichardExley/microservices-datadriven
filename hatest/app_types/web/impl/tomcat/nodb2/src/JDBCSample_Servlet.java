@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import java.sql.Timestamp;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +17,18 @@ public class JDBCSample_Servlet extends HttpServlet {
     super();
   }
 
+  public void init() {
+    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    System.out.println(timestamp + " Starting JDBCSample_Servlet");
+  }
+  
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
     try {
       String id = request.getPathInfo().split("/")[1];
       String probe = request.getParameter("probe");
-      // System.out.println("doGet: id: " + id + " probe: " + probe);
+      Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+      System.out.println(timestamp + " doGet: id: " + id + " probe: " + probe);
 
       if (id.equals("1")) {
         response.setStatus(200);
