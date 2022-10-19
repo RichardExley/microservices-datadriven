@@ -58,7 +58,6 @@
             </configuration>
         </plugin>
  
-        <!-- Tomcat plugin--> 
         <plugin>
             <groupId>org.apache.tomcat.maven</groupId>
             <artifactId>tomcat7-maven-plugin</artifactId>
@@ -66,8 +65,7 @@
             <configuration>
                 <port>8080</port>
                 <path>/user</path>
-                <!--<tomcatWebXml>${project.basedir}/web/WEB-INF/web.xml</tomcatWebXml>-->
-            </configuration>
+              </configuration>
         </plugin>
  
     </plugins>

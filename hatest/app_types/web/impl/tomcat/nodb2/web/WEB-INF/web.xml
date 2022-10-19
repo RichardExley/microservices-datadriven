@@ -1,6 +1,0 @@
-<servlet>
-    <servlet-name>JDBCSample_Servlet</servlet-name>
-    <display-name>JDBCSample_Servlet</display-name>
-    <servlet-class>com.oracle.maa.JDBCSample_Servlet</servlet-class>
-    <load-on-startup>4</load-on-startup>
-</servlet> 
