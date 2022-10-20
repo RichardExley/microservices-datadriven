@@ -1,7 +1,6 @@
 package com.oracle.maa.tomcat;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import java.util.logging.*;
 
@@ -10,7 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-// MAA Tip: Load on Startup
+
+// MAA Tip: Load the servlet on Startup
 @WebServlet(name="MAA_Servlet", urlPatterns="/*", loadOnStartup=1)
 public class MAA_Servlet extends HttpServlet {
   private static final long serialVersionUID = 1L;     
@@ -21,7 +21,6 @@ public class MAA_Servlet extends HttpServlet {
   }
 
   public void init() {
-    logger.setLevel(Level.ALL);
     logger.info("Servlet starting");
   }
   

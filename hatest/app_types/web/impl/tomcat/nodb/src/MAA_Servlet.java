@@ -1,7 +1,11 @@
+/*
+ ** Copyright (c) 2023 Oracle and/or its affiliates.
+ ** Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
+ */
+
 package com.oracle.maa.tomcat;
 
 import java.io.IOException;
-//import java.io.PrintWriter;
 
 import java.util.logging.*;
 
@@ -21,7 +25,6 @@ public class MAA_Servlet extends HttpServlet {
   }
 
   public void init() {
-    // logger.setLevel(Level.ALL);
     logger.info("Servlet starting");
   }
   

@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import oracle.ucp.jdbc.PoolDataSource;
+import oracle.ucp.jdbc.PoolDataSourceFactory;
+
 // MAA Tip: Load the servlet on Startup
 @WebServlet(name="MAA_Servlet", urlPatterns="/*", loadOnStartup=1)
 public class MAA_Servlet extends HttpServlet {
@@ -28,6 +31,8 @@ public class MAA_Servlet extends HttpServlet {
   static String dbUser     = System.getenv("HATEST_DB_MAIN_USER");
   static String dbURL      = System.getenv("HATEST_JDBC_URL");
 
+  static PoolDataSource pds;
+
   public MAA_Servlet() {
     super();
   }
@@ -35,11 +40,18 @@ public class MAA_Servlet extends HttpServlet {
   public void init() {
     logger.info("Servlet starting");
 
-    // Load JDBC driver
+    // Load JDBC driver and create the pool datasource
     try {
-      DriverManager.registerDriver (new oracle.jdbc.OracleDriver());
+      pds = PoolDataSourceFactory.getPoolDataSource();
+      pds.setConnectionFactoryClassName("oracle.jdbc.pool.OracleDataSource");
+      pds.setURL(dbURL);
+      pds.setUser(dbUser);
+      pds.setPassword(dbPassword);
+      pds.setInitialPoolSize(4);
+      pds.setMinPoolSize(4);
+      pds.setMaxPoolSize(4);
     } catch (SQLException e) {
-      logger.log(Level.SEVERE, "Exception loading the JDBC driver", e);
+      e.printStackTrace();
     }
   }
   
@@ -48,7 +60,7 @@ public class MAA_Servlet extends HttpServlet {
     String id = "";
     String probe = "";
 
-    try (Connection conn = DriverManager.getConnection(dbURL, dbUser, dbPassword)) {
+    try (Connection conn = pds.getConnection(dbURL, dbUser, dbPassword)) {
       id = request.getPathInfo().split("/")[1];
       probe = request.getParameter("probe");
       logger.info("id: " + id + " probe: " + probe);
