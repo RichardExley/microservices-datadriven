@@ -1,7 +1,7 @@
 package com.oracle.maa.tomcat;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.IOException;
+//import java.io.PrintWriter;
 
 import java.util.logging.*;
 
@@ -21,7 +21,7 @@ public class MAA_Servlet extends HttpServlet {
   }
 
   public void init() {
-    logger.setLevel(Level.ALL);
+    // logger.setLevel(Level.ALL);
     logger.info("Servlet starting");
   }
   
