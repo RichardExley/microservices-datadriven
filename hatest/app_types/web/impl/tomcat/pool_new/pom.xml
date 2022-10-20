@@ -28,6 +28,12 @@
     </dependency>
 
     <dependency>
+      <groupId>com.oracle.database.jdbc</groupId>
+      <artifactId>ucp</artifactId>
+      <version>19.16.0.0</version>
+    </dependency>
+
+    <dependency>
       <groupId>com.oracle.database.security</groupId>
       <artifactId>oraclepki</artifactId>
       <version>19.16.0.0</version>
