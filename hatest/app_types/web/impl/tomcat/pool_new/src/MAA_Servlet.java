@@ -64,7 +64,7 @@ public class MAA_Servlet extends HttpServlet {
     String id = "";
     String probe = "";
 
-    try (Connection conn = pds.getConnection(dbURL, dbUser, dbPassword)) {
+    try (Connection conn = pds.getConnection()) {
       id = request.getPathInfo().split("/")[1];
       probe = request.getParameter("probe");
       logger.info("id: " + id + " probe: " + probe);
