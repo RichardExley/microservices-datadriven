@@ -1,4 +1,4 @@
 if test -f $HATEST_PROMTAIL_PID_FILE; then
-  kill -9 "$(<$HATEST_PROMTAIL_PID_FILE)" || true
+  kill -15 "$(<$HATEST_PROMTAIL_PID_FILE)" || true
   rm $HATEST_PROMTAIL_PID_FILE
 fi

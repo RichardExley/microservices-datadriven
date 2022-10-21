@@ -12,5 +12,5 @@ fi
 $HATEST_CODE/promtail_stop.sh
 
 # Start it
-nohup $HATEST_PROMTAIL_HOME/promtail-linux-amd64 -config.expand-env=true -config.file=$HATEST_CODE/promtail.yaml >$HATEST_LOG_DIR/promtail.log 2>&1 &
+$HATEST_PROMTAIL_HOME/promtail-linux-amd64 -config.expand-env=true -config.file=$HATEST_CODE/promtail.yaml >$HATEST_LOG_DIR/promtail.log 2>&1 &
 echo "$!" > $HATEST_PROMTAIL_PID_FILE
