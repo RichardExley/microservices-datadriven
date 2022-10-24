@@ -28,5 +28,5 @@ export const options = {
 };
 
 export default function () {
-  http.get('http://localhost:8080/user/1?probe=' + __ITER.toString());
+  http.get('http://localhost:8080/user/1?probe=' + (__VU * 1000 + __ITER + 1).toString());
 }
