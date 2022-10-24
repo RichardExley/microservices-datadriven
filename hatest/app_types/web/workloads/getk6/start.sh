@@ -1,0 +1,1 @@
+k6 run --out json=$HATEST_LOG_DIR/test.json get.js
