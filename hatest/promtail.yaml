@@ -35,10 +35,10 @@ scrape_configs:
   pipeline_stages:
   - logfmt:
       mapping:
-        timestamp: timestamp
+        ts: timestamp
   - timestamp:
-      format: Unix
-      source: timestamp 
+      format: RFC3339
+      source: ts
 - job_name: k6results
   static_configs:
   - targets:
