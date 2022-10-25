@@ -29,5 +29,5 @@ export const options = {
 
 export default function () {
   const res = http.get('http://localhost:8080/user/1?probe=' + (__VU * 1000 + __ITER + 1).toString());
-  console.log('latency=${String(res.timings.duration/1000.0)} http_status=${res.status}');
+  console.log(`latency=${String(res.timings.duration/1000.0)} http_status=${res.status}`);
 }
