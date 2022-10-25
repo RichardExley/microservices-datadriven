@@ -24,6 +24,19 @@ scrape_configs:
   - timestamp:
       format: Unix
       source: timestamp  
+- job_name: k6log
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job_name: ${HATEST_JOB_NAME}
+      log: k6log
+      __path__: ${HATEST_K6_LOG}
+  pipeline_stages:
+  - logfmt:
+  - timestamp:
+      format: Unix
+      source: timestamp  
 - job_name: k6results
   static_configs:
   - targets:
