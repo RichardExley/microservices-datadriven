@@ -12,7 +12,7 @@ export const options = {
 
       // It should start 30 iterations per `timeUnit`. Note that iterations starting points
       // will be evenly spread across the `timeUnit` period.
-      rate: 1,
+      rate: 10,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
@@ -29,7 +29,7 @@ export const options = {
 
 export default function () {
   const timestamp = new Date().toISOString();
-  const probe = __VU * 1000 + __ITER + 1;
+  const probe = __VU * 100000 + __ITER + 1;
   const res = http.get(`http://localhost:8080/user/1?probe=${probe}`);
   console.log(
     `timestamp=${timestamp} ` +
