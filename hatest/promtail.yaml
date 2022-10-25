@@ -34,10 +34,10 @@ scrape_configs:
       __path__: ${HATEST_K6_LOG}
   pipeline_stages:
   - logfmt:
-      time: timestamp
+      mapping:
   - timestamp:
       format: Unix
-      source: time  
+      source: timestamp 
 - job_name: k6results
   static_configs:
   - targets:
