@@ -52,7 +52,7 @@ scrape_configs:
       expressions:
         timestamp: data.time
   - timestamp:
-      format: Unix
+      format: RFC3339
       source: timestamp  
 - job_name: app
   static_configs:
