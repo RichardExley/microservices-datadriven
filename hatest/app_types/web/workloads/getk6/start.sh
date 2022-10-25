@@ -1,1 +1,1 @@
-k6 run --out json=$HATEST_LOG_DIR/k6results.log get.js
+k6 run --out json=$HATEST_K6_RESULTS_LOG --log-output=file=$HATEST_K6_LOG get.js
