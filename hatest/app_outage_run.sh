@@ -19,7 +19,7 @@ cd $HATEST_CODE/app_types/$app_type/impl/$impl/$impl_ver
 
 # Start the outage plan (async)
 cd $HATEST_CODE/outages/$outage
-./start.sh "$outage" &
+./start.sh &
 
 # Start the workload (async)
 cd $HATEST_CODE/app_types/$app_type/workloads/$workload

@@ -1,5 +1,3 @@
-outage="$1"
-cd "$outage"
 hatest_set_phase rampup
 hatest_result_app_outage 'event=plan_start'
 sleep 30
