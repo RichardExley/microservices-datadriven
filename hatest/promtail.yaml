@@ -35,6 +35,7 @@ scrape_configs:
   pipeline_stages:
   - logfmt:
       mapping:
+        timestamp: timestamp
   - timestamp:
       format: Unix
       source: timestamp 
