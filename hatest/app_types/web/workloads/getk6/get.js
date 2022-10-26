@@ -28,12 +28,19 @@ export const options = {
 };
 
 export default function () {
+  const params = {
+    timeout: 10,
+    tags: {phase: "blah"}
+  };
   const timestamp = new Date().toISOString();
   const probe = __VU * 100000 + __ITER + 1;
-  const res = http.get(`http://localhost:8080/user/1?probe=${probe}`);
+  const res = http.get(`http://localhost:8080/user/1?probe=${probe}`, params);
   console.log(
     `timestamp=${timestamp} ` +
     `probe=${probe} ` +
     `latency=${res.timings.duration/1000.0} ` + 
-    `http_status=${res.status}`);
+    `http_status=${res.status}` +
+    `status_text="${res.status_text}"` +
+    `error="${res.error}"` +
+    `error_code=${res.error_code}`);
 }
