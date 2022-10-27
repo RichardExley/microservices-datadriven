@@ -35,10 +35,26 @@ export default function () {
   const timestamp = new Date().toISOString();
   const probe = __VU * 100000 + __ITER + 1;
   const res = http.get(`http://localhost:8080/user/1?probe=${probe}`, params);
+  code = "unexpected";
+  switch (res.status) {
+    case 500:
+      code = "http500";
+      break;
+    case 200:
+      code = "http200";
+      break;
+    case 404:
+      code = "http404";
+      break;
+    case 0:
+      if (res.error == "request timeout") code="timeout";
+      break;
+  }
   console.log(
     `timestamp=${timestamp} ` +
     `probe=${probe} ` +
     `latency=${res.timings.duration/1000.0} ` + 
+    `code=${code} ` +
     `http_status=${res.status} ` +
     `status_text="${res.status_text}" ` +
     `error="${res.error}" ` +
