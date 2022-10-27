@@ -12,7 +12,7 @@ export const options = {
 
       // It should start 30 iterations per `timeUnit`. Note that iterations starting points
       // will be evenly spread across the `timeUnit` period.
-      rate: 1000,
+      rate: 10,
 
       // It should start `rate` iterations per second
       timeUnit: '1s',
