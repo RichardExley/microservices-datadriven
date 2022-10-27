@@ -39,8 +39,8 @@ export default function () {
     `timestamp=${timestamp} ` +
     `probe=${probe} ` +
     `latency=${res.timings.duration/1000.0} ` + 
-    `http_status=${res.status}` +
-    `status_text="${res.status_text}"` +
-    `error="${res.error}"` +
+    `http_status=${res.status} ` +
+    `status_text="${res.status_text}" ` +
+    `error="${res.error}" ` +
     `error_code=${res.error_code}`);
 }
