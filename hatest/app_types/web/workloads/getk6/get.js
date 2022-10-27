@@ -35,7 +35,7 @@ export default function () {
   const timestamp = new Date().toISOString();
   const probe = __VU * 100000 + __ITER + 1;
   const res = http.get(`http://localhost:8080/user/1?probe=${probe}`, params);
-  code = "unexpected";
+  var code = "unexpected";
   switch (res.status) {
     case 500:
       code = "http500";
