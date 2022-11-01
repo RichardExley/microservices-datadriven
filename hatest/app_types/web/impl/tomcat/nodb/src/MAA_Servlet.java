@@ -42,7 +42,7 @@ public class MAA_Servlet extends HttpServlet {
         response.setStatus(200);
         response.getWriter().println("chris");
       } else {
-        response.setStatus(201);
+        response.setStatus(404);
       }
     } catch (Exception e) {
       response.setStatus(500);
