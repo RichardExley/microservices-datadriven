@@ -36,6 +36,8 @@ public class MAA_Servlet extends HttpServlet {
   static String dbPassword = System.getenv("HATEST_DB_MAIN_PASSWORD");
   static String dbUser     = System.getenv("HATEST_DB_MAIN_USER");
   static String dbURL      = System.getenv("HATEST_JDBC_URL");
+  final  int    poolSize   = 10;
+  final  int    sqlTries = 2;
 
   static PoolDataSource pds;
   static Connection nextConnection = null;
@@ -46,7 +48,6 @@ public class MAA_Servlet extends HttpServlet {
 
   public void init() {
     logger.info("Servlet starting");
-    final int poolSize = 10;
 
     // Load JDBC driver and create the pool datasource
     try {
@@ -113,27 +114,36 @@ public class MAA_Servlet extends HttpServlet {
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
+    int sqlTry = 1;
     String id = "";
     String probe = "";
+    id = request.getPathInfo().split("/")[1];
+    probe = request.getParameter("probe");
+    logger.info("id: " + id + " probe: " + probe);
 
-    try (Connection conn = getConnectionNoWait()) {
-      id = request.getPathInfo().split("/")[1];
-      probe = request.getParameter("probe");
-      logger.info("id: " + id + " probe: " + probe);
-
-      PreparedStatement stmt = conn.prepareStatement(get_id_sql); 
-      stmt.setString(1, id);
-      ResultSet rs = stmt.executeQuery(); 
-      if (rs.next()) {
-        response.setStatus(200);
-        response.getWriter().println(rs.getString(1));
-      } else {
-        response.setStatus(201);
+    while (true) {
+      try (Connection conn = getConnectionNoWait()) {
+        PreparedStatement stmt = conn.prepareStatement(get_id_sql); 
+        stmt.setString(1, id);
+        ResultSet rs = stmt.executeQuery(); 
+        if (rs.next()) {
+          response.setStatus(200);
+          response.getWriter().println(rs.getString(1));
+        } else {
+          response.setStatus(201);
+        }
+        break;
+      } catch (Exception e) {
+        if (sqlTry < sqlTries) {
+          logger.log(Level.SEVERE, "Exception processing probe# " + probe + " , retrying", e);
+          sqlTry++;
+        } else {
+          response.setStatus(500);
+          response.setHeader("Exception", e.toString());
+          logger.log(Level.SEVERE, "Exception processing probe# " + probe, e);
+          break;
+        }
       }
-    } catch (Exception e) {
-      response.setStatus(500);
-      response.setHeader("Exception", e.toString());
-      logger.log(Level.SEVERE, "Exception processing probe# " + probe, e);
     }
   }
 
