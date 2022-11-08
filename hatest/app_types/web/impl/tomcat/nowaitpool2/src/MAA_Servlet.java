@@ -70,7 +70,7 @@ public class MAA_Servlet extends HttpServlet {
     }
   }
   
-  private Connection getConnectionNoWait() throws SqlException (
+  public Connection getConnectionNoWait() throws SqlException (
     Connection conn;
     synchonized(nextConnection) {
       if (nextConnection == null) {
@@ -82,7 +82,7 @@ public class MAA_Servlet extends HttpServlet {
     return conn;
   )
 
-  private void poolBackground() {
+  public void poolBackground() {
     Connection conn;
     while (true) {
       synchonized(nextConnection) {
