@@ -60,7 +60,8 @@ public class MAA_Servlet extends HttpServlet {
       pds.setMinPoolSize(poolSize);
       pds.setMaxPoolSize(poolSize);
       pds.setConnectionWaitTimeout(0);
-
+      pds.setMaxStatements(10);
+      
       Runnable r = new Runnable() {
         public void run() {
           poolBackground();
