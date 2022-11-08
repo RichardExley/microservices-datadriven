@@ -71,11 +71,11 @@ public class MAA_Servlet extends HttpServlet {
     }
   }
   
-  public Connection getConnectionNoWait() throws SqlException {
+  public Connection getConnectionNoWait() throws SQLException {
     Connection conn;
     synchronized(nextConnection) {
       if (nextConnection == null) {
-        throw new SqlException("no connection available with no wait");
+        throw new SQLException("no connection available with no wait");
       } else
         conn = nextConnection;
         nextConnection = null;
@@ -110,7 +110,7 @@ public class MAA_Servlet extends HttpServlet {
     String id = "";
     String probe = "";
 
-    try (Connection conn = pds.getConnectionNoWait()) {
+    try (Connection conn = getConnectionNoWait()) {
       id = request.getPathInfo().split("/")[1];
       probe = request.getParameter("probe");
       logger.info("id: " + id + " probe: " + probe);
