@@ -71,7 +71,7 @@ public class MAA_Servlet extends HttpServlet {
     }
   }
   
-  public Connection getConnectionNoWait() throws SqlException {}
+  public Connection getConnectionNoWait() throws SqlException {
     Connection conn;
     synchronized(nextConnection) {
       if (nextConnection == null) {
