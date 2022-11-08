@@ -100,7 +100,12 @@ public class MAA_Servlet extends HttpServlet {
           logger.log(Level.INFO, "Exception getting connection in background ", e);
         }
       } else {
-        Thread.sleep(0,100); // Sleep 100 nanoseconds so we don't spin
+        try {
+          Thread.sleep(0,100); // Sleep 100 nanoseconds so we don't spin
+        } catch (InterruptedException e) {
+          Thread.currentThread().interrupt();
+          logger.log(Level.SEVERE, "pool background interrupted ", e);
+        }
       }
     }
   }
