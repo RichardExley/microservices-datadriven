@@ -46,6 +46,7 @@ public class MAA_Servlet extends HttpServlet {
 
   public void init() {
     logger.info("Servlet starting");
+    final int poolSize = 10;
 
     // Load JDBC driver and create the pool datasource
     try {
@@ -54,9 +55,9 @@ public class MAA_Servlet extends HttpServlet {
       pds.setURL(dbURL);
       pds.setUser(dbUser);
       pds.setPassword(dbPassword);
-      pds.setInitialPoolSize(4);
-      pds.setMinPoolSize(4);
-      pds.setMaxPoolSize(4);
+      pds.setInitialPoolSize(poolSize);
+      pds.setMinPoolSize(poolSize);
+      pds.setMaxPoolSize(poolSize);
       pds.setConnectionWaitTimeout(0);
 
       Runnable r = new Runnable() {
