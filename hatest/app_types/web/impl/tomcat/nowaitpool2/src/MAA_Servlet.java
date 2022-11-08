@@ -73,7 +73,7 @@ public class MAA_Servlet extends HttpServlet {
   
   public Connection getConnectionNoWait() throws SQLException {
     Connection conn;
-    synchronized(nextConnection) {
+    synchronized(this) {
       if (nextConnection == null) {
         throw new SQLException("no connection available with no wait");
       } else
@@ -86,13 +86,13 @@ public class MAA_Servlet extends HttpServlet {
   public void poolBackground() {
     Connection conn;
     while (true) {
-      synchronized(nextConnection) {
+      synchronized(this) {
         conn = nextConnection;
       }
       if (conn == null) {
         try {
           conn = pds.getConnection();
-          synchronized(nextConnection) {
+          synchronized(this) {
             nextConnection = conn;
           }
         } catch (Exception e) {
