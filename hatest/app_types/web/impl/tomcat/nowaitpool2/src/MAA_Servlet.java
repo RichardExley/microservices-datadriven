@@ -71,14 +71,15 @@ public class MAA_Servlet extends HttpServlet {
   }
   
   private Connection getConnectionNoWait() throws SqlException (
+    Connection conn;
     synchonized(nextConnection) {
       if (nextConnection == null) {
         throw new SqlException("no connection available with no wait")
       } else
         Connection conn = nextConnection;
         nextConnection = null;
-        return conn;
     }
+    return conn;
   )
 
   private void poolBackground() {
