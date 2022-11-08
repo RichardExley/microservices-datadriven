@@ -76,7 +76,7 @@ public class MAA_Servlet extends HttpServlet {
       if (nextConnection == null) {
         throw new SqlException("no connection available with no wait")
       } else
-        Connection conn = nextConnection;
+        conn = nextConnection;
         nextConnection = null;
     }
     return conn;
