@@ -29,8 +29,7 @@ export const options = {
 
 export default function () {
   const params = {
-    timeout: 10,
-    tags: {phase: "blah"}
+    timeout: 5000
   };
   const timestamp = new Date().toISOString();
   const probe = __VU * 100000 + __ITER + 1;
