@@ -95,6 +95,9 @@ public class MAA_Servlet extends HttpServlet {
         try {
           conn = pds.getConnection();
           PreparedStatement stmt = conn.prepareStatement(get_id_sql); 
+          stmt.setString(1, "1");
+          ResultSet rs = stmt.executeQuery(); 
+          rs.next();
           synchronized(this) {
             nextConnection = conn;
           }
