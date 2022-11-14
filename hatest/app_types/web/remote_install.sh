@@ -19,8 +19,6 @@ fi
 cd microservices-datadriven
 git pull
 
-cd ~/hatest/microservices-datadriven/app_types/web/impl/tomcat
-./install.sh 
-cd ~/hatest/microservices-datadriven/app_types/web/impl/python
+cd ~/hatest/microservices-datadriven/hatest/app_types/web
 ./install.sh 
 !
