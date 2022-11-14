@@ -5,7 +5,7 @@
 ip="$1"
 ssh_file="$2"
 
-ssh -i $ssh_file ops@$ip <<!
+ssh -t -i $ssh_file ops@$ip <<!
 which git || sudo dnf -y install git
 
 cd
