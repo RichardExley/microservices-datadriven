@@ -16,7 +16,7 @@ if ! test -d microservices-datadriven; then
   git clone -b "hatest" https://github.com/richardexley/microservices-datadriven.git
 fi
 
-cd microservices-datadriven
+cd ~/hatest/microservices-datadriven
 git pull
 
 cd ~/hatest/microservices-datadriven/hatest/app_types/web
