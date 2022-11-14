@@ -2,10 +2,12 @@
 # Copyright (c) 2023 Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
+set -x
+
 ip="$1"
 ssh_file="$2"
 
-ssh -t -i $ssh_file ops@$ip <<!
+ssh -t -i $ssh_file opc@$ip <<!
 which git || sudo dnf -y install git
 
 cd
