@@ -4,21 +4,15 @@
 
 ip="$1"
 ssh_file="$2"
+impl="$3"
+impl_ver="$4"
 
 ssh -t -i $ssh_file opc@$ip <<!
-which git || sudo dnf -y install git
-
-cd
-mkdir -p ~/hatest
-cd ~/hatest
-
-if ! test -d microservices-datadriven; then
-  git clone -b "hatest" https://github.com/richardexley/microservices-datadriven.git
+if ! test -d ~/hatest/microservices-datadriven; then
+  echo 'Error: Not installed. Run install first"
+  exit 1
 fi
 
-cd ~/hatest/microservices-datadriven
-git pull
-
 cd ~/hatest/microservices-datadriven/hatest/app_types/web
-./install.sh 
+./shutdown.sh $impl $impl_ver
 !
